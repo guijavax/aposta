@@ -1,4 +1,6 @@
 package com.example.aposta.application.port.output
 
-class Example {
+interface S3ClientUseCase {
+
+    fun sendS3()
 }

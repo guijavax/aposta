@@ -1,14 +1,11 @@
-package com.example.aposta.domain.service
+package com.example.aposta.domain.adapters.primary
 
-import com.example.aposta.application.port.input.CreateClientUseCase
-import com.example.aposta.application.port.input.DeleteClientUseCase
-import com.example.aposta.application.port.input.FindClientUseCase
-import com.example.aposta.application.port.input.UpdateClienteUseCase
+import com.example.aposta.application.port.input.ClientUseCase
 import com.example.aposta.domain.model.Cliente
 import org.springframework.stereotype.Service
 
 @Service
-class ClientService : CreateClientUseCase, DeleteClientUseCase, UpdateClienteUseCase, FindClientUseCase {
+class ClientAdapter : ClientUseCase {
 
     override fun saveCliente(cliente: Cliente) {
         TODO("Not yet implemented")
