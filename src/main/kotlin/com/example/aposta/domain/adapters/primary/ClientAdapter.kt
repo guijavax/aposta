@@ -2,10 +2,13 @@ package com.example.aposta.domain.adapters.primary
 
 import com.example.aposta.application.port.input.ClientUseCase
 import com.example.aposta.domain.model.Cliente
+import com.example.aposta.infra.repository.ClientRepository
 import org.springframework.stereotype.Service
 
 @Service
 class ClientAdapter : ClientUseCase {
+
+    lateinit var clientRepository: ClientRepository
 
     override fun saveCliente(cliente: Cliente) {
         TODO("Not yet implemented")
