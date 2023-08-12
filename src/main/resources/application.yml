@@ -1,8 +1,13 @@
 spring:
+  #DATABASE
   datasource:
-    url: jdbc:h2:mem:client
-    username: sa
-    password: password
+    url: jdbc:h2:mem:aposta
     driverClassName: org.h2.Driver
+    username: guiborges
+    password: root
   jpa:
-    spring.jpa.database-platform: org.hibernate.dialect.H2Dialect
+    database-platform: org.hibernate.dialect.H2Dialect
+  h2:
+    console:
+      enabled: true
+jpa-show-sql: true
