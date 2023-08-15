@@ -1,10 +1,11 @@
 package com.example.aposta.application.port.input
 
 import com.example.aposta.domain.model.Cliente
+import com.example.aposta.infra.entity.ClientEntity
 
 interface ClientUseCase {
 
-    fun saveCliente(cliente: Cliente)
+    fun saveCliente(cliente: Cliente) : ClientEntity
 
     fun deletar(id : Int)
 
@@ -12,5 +13,5 @@ interface ClientUseCase {
 
     fun atualiza(client : Cliente)
 
-
+    fun findAll() : List<Cliente>
 }
