@@ -35,6 +35,7 @@ class ClientAdapter : ClientUseCase {
     }
 
     override fun findAll(): List<Cliente> {
-        TODO("Not yet implemented")
+        val listCliente = clientRepository.findAll()
+        return listCliente.map { it.toCliente() }
     }
 }

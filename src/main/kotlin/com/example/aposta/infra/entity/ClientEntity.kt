@@ -17,10 +17,14 @@ data class ClientEntity(
     val idade : Int,
     val dataNasc : String
 )
-     fun Cliente.toClientEntity() = ClientEntity(
-        nome = name,
-        cpf = cpf.toLong(),
-        idade = idade,
-        dataNasc = dataNasc
-    )
+     fun Cliente.toClientEntity() : ClientEntity {
+         var   cpfConvert = cpf.replace(".", "").replace("-", "")
+         return ClientEntity(
+             nome = name,
+             cpf = cpfConvert.toLong(),
+             idade = idade,
+             dataNasc = dataNasc
+         )
+     }
+
 
