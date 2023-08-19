@@ -2,6 +2,7 @@ package com.example.aposta.infra.rest
 
 import com.example.aposta.application.port.input.ClientUseCase
 import com.example.aposta.domain.model.Cliente
+import jakarta.validation.Valid
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.PostMapping
@@ -17,7 +18,7 @@ class ClienteController {
     lateinit var clienteUseCase : ClientUseCase
 
     @PostMapping
-    fun saveCliente(@RequestBody cliente: Cliente) : ResponseEntity<String> {
+    fun saveCliente(@RequestBody @Valid cliente: Cliente) : ResponseEntity<String> {
         return  ResponseEntity.ok(clienteUseCase.saveCliente(cliente).toString())
     }
 }

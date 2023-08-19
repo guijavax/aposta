@@ -2,6 +2,7 @@ package com.example.aposta.infra.entity
 
 import com.example.aposta.domain.model.Cliente
 import jakarta.persistence.*
+import jakarta.validation.constraints.Pattern
 
 
 @Entity
@@ -18,7 +19,7 @@ data class ClientEntity(
 )
      fun Cliente.toClientEntity() = ClientEntity(
         nome = name,
-        cpf = cpf,
+        cpf = cpf.toLong(),
         idade = idade,
         dataNasc = dataNasc
     )

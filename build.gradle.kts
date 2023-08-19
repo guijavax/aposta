@@ -26,6 +26,9 @@ dependencies {
 	implementation ("org.jetbrains.kotlin:kotlin-reflect")
 	testImplementation ("org.springframework.boot:spring-boot-starter-test")
 	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
+	implementation("org.springframework.boot:spring-boot-starter-validation")
+	implementation("jakarta.validation:jakarta.validation-api:3.0.2")
+
 	runtimeOnly("com.h2database:h2:2.2.220")
 
 }
