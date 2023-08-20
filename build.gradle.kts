@@ -20,7 +20,7 @@ java.sourceCompatibility = JavaVersion.VERSION_17
 repositories {
 	mavenCentral()
 }
-
+val versionAws = "1.12.533"
 dependencies {
 	implementation ("org.springframework.boot:spring-boot-starter-web")
 	implementation ("org.jetbrains.kotlin:kotlin-reflect")
@@ -28,7 +28,9 @@ dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
 	implementation("org.springframework.boot:spring-boot-starter-validation")
 	implementation("jakarta.validation:jakarta.validation-api:3.0.2")
-	implementation("com.amazonaws:aws-java-sdk-s3:1.12.533")
+	implementation("com.amazonaws:aws-java-sdk-s3:$versionAws")
+	implementation("com.amazonaws:aws-java-sdk-core:$versionAws")
+	implementation("com.amazonaws:aws-java-sdk-core:$versionAws")
 
 	runtimeOnly("com.h2database:h2:2.2.220")
 
