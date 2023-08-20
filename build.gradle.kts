@@ -24,7 +24,6 @@ val versionAws = "1.12.533"
 dependencies {
 	implementation ("org.springframework.boot:spring-boot-starter-web")
 	implementation ("org.jetbrains.kotlin:kotlin-reflect")
-	testImplementation ("org.springframework.boot:spring-boot-starter-test")
 	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
 	implementation("org.springframework.boot:spring-boot-starter-validation")
 	implementation("jakarta.validation:jakarta.validation-api:3.0.2")
@@ -33,6 +32,9 @@ dependencies {
 	implementation("com.amazonaws:aws-java-sdk-core:$versionAws")
 
 	runtimeOnly("com.h2database:h2:2.2.220")
+
+	testImplementation ("org.springframework.boot:spring-boot-starter-test")
+
 
 }
 
