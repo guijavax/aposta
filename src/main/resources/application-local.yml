@@ -11,3 +11,8 @@ spring:
     console:
       enabled: true
 jpa-show-sql: true
+
+aws:
+  region: us-east-1
+
+  security:
