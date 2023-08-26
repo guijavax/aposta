@@ -1,5 +1,6 @@
 package com.example.aposta.infra.config
 
+import com.example.aposta.infra.handler.CustomizeAuthenticationSuccessHandler
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
@@ -9,17 +10,21 @@ import org.springframework.security.core.GrantedAuthority
 import org.springframework.security.core.authority.SimpleGrantedAuthority
 import org.springframework.security.core.authority.mapping.GrantedAuthoritiesMapper
 import org.springframework.security.oauth2.core.oidc.user.OidcUserAuthority
+import org.springframework.security.web.SecurityFilterChain
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler
-import java.util.stream.Collectors
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher.antMatcher
+import java.util.stream.Collectors
 
 
 @Configuration
 @EnableWebSecurity
-class SecurityConfig  {
+class SecurityConfig(handler : CustomizeAuthenticationSuccessHandler)  {
 
-    @Autowired
     lateinit var customizeAuthenticationSuccessHandler: AuthenticationSuccessHandler
+
+    init {
+        customizeAuthenticationSuccessHandler = handler
+    }
 
     @Bean
     fun securityFilterChain(http: HttpSecurity) =
@@ -32,16 +37,15 @@ class SecurityConfig  {
                     .requestMatchers(antMatcher("/**")).hasRole("ADMIN")
                     .anyRequest().authenticated()
 
-            }.oauth2Login{oauth->
-                oauth.redirectionEndpoint{endpoint ->
+            }.oauth2Login { oauth ->
+                oauth.redirectionEndpoint { endpoint ->
                     endpoint.baseUri("/login/oauth2/code/cognito")
 
-                }.userInfoEndpoint {
-                    userInfo -> userInfo.userAuthoritiesMapper(useAuthoritiesMapper())
+                }.userInfoEndpoint { userInfo ->
+                    userInfo.userAuthoritiesMapper(useAuthoritiesMapper())
                 }.successHandler(customizeAuthenticationSuccessHandler)
 
-            }.logout{ it.logoutSuccessUrl("/login")}.build()
-
+            }.logout { it.logoutSuccessUrl("/login") }.build()
 
     @Bean
     fun useAuthoritiesMapper() : GrantedAuthoritiesMapper {
@@ -53,4 +57,5 @@ class SecurityConfig  {
                }
         }
     }
+
 }

@@ -1,0 +1,19 @@
+spring:
+  #DATABASE
+  datasource:
+    url: jdbc:h2:mem:aposta
+    driverClassName: org.h2.Driver
+    username: guiborges
+    password: root
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+  h2:
+    console:
+      enabled: true
+jpa-show-sql: true
+
+aws:
+  region: us-east-1
+
+  main:
+    web-application-type: reactive
