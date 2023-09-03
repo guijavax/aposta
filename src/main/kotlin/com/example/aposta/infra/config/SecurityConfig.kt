@@ -6,6 +6,7 @@ import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity
+import org.springframework.security.config.http.SessionCreationPolicy
 import org.springframework.security.core.GrantedAuthority
 import org.springframework.security.core.authority.SimpleGrantedAuthority
 import org.springframework.security.core.authority.mapping.GrantedAuthoritiesMapper
@@ -34,7 +35,7 @@ class SecurityConfig(handler : CustomizeAuthenticationSuccessHandler)  {
                     .requestMatchers(antMatcher("/")).permitAll()
                     .requestMatchers(antMatcher("/cliente/**")).hasRole("USER")
                     .requestMatchers(antMatcher("/clienteTrial/**")).hasRole("TRIAL")
-                    .requestMatchers(antMatcher("/**")).hasRole("ADMIN")
+                    .requestMatchers(antMatcher("/**")).hasRole("admin")
                     .anyRequest().authenticated()
 
             }.oauth2Login { oauth ->
@@ -45,16 +46,30 @@ class SecurityConfig(handler : CustomizeAuthenticationSuccessHandler)  {
                     userInfo.userAuthoritiesMapper(useAuthoritiesMapper())
                 }.successHandler(customizeAuthenticationSuccessHandler)
 
-            }.logout { it.logoutSuccessUrl("/login") }.build()
+            }.sessionManagement {session ->
+                session.sessionCreationPolicy(SessionCreationPolicy.ALWAYS)
+             }.
+
+            logout { it.logoutSuccessUrl("/login") }.build()
 
     @Bean
-    fun useAuthoritiesMapper() : GrantedAuthoritiesMapper {
-        return GrantedAuthoritiesMapper {authorities ->
-            val oidcUserAuthority = ArrayList<Any>(authorities)[0] as OidcUserAuthority
+    fun useAuthoritiesMapper() : GrantedAuthoritiesMapper? {
+        try {
 
-               (oidcUserAuthority.getAttributes().get("cognito:groups") as Collection<GrantedAuthority>?)?.let {
-                   it.stream().map { role -> SimpleGrantedAuthority("ROLE_$role") }.collect(Collectors.toSet())
-               }
+
+            return GrantedAuthoritiesMapper { authorities ->
+                val oidcUserAuthority = ArrayList<Any>(authorities)[0] as OidcUserAuthority
+
+                (oidcUserAuthority.getAttributes().get("cognito:groups") as Collection<String>?)?.let {
+                    it.stream().map {role ->
+                        println(role)
+                             SimpleGrantedAuthority("ROLE_$role")
+                    }.collect(Collectors.toSet())
+                }
+            }
+        } catch (e :  Exception) {
+            println(e.message)
+            return  null
         }
     }
 
