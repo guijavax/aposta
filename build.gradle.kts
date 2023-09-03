@@ -21,6 +21,7 @@ repositories {
 	mavenCentral()
 }
 val versionAws = "1.12.533"
+
 dependencies {
 	implementation ("org.springframework.boot:spring-boot-starter-web")
 	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
@@ -31,6 +32,8 @@ dependencies {
 	implementation("com.amazonaws:aws-java-sdk-s3:$versionAws")
 	implementation("com.amazonaws:aws-java-sdk-core:$versionAws")
 	implementation("com.amazonaws:aws-java-sdk-cognitoidp:$versionAws")
+	implementation("org.apache.poi:poi:4.1.2")
+
 
 	runtimeOnly("com.h2database:h2:2.2.220")
 
