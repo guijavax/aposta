@@ -11,24 +11,6 @@ spring:
     console:
       enabled: true
 
-
-  security:
-    oauth2:
-      client:
-        registration:
-          cognito:
-            client-id: seu-client-id
-            client-secret: seu-client-secret
-            scope: admin
-            redirect-uri: http://localhost:8080/login/oauth2/code/cognito
-            clientName: acesso
-            authorization-grant-type: authorization_code
-        provider:
-          cognito:
-            issuerUri: endereco-user-pool-id
-
-issuer-uri: http://localhost:9000
-
 aws:
   region: us-east-1
 
