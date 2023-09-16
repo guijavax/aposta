@@ -1,6 +1,6 @@
 package com.example.aposta.domain.model
 
-import com.example.aposta.infra.entity.ClientEntity
+import com.example.aposta.infra.entity.ClienteEntity
 import jakarta.validation.constraints.Min
 import jakarta.validation.constraints.Pattern
 
@@ -25,7 +25,7 @@ data class Cliente(
                  "}"
 
 }
-    fun ClientEntity.toCliente() = Cliente(
+    fun ClienteEntity.toCliente() = Cliente(
         name = nome,
         idade = idade,
         cpf = cpf.toString(),
